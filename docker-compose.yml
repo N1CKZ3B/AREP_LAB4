@@ -1,0 +1,87 @@
+version: '3.8'
+
+services:
+  db:
+    build:
+      context: .
+      dockerfile: Dockerfile # Usa el Dockerfile con tu configuración personalizada de MongoDB
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./mongo-data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: erick123
+      MONGO_INITDB_DATABASE: logdb
+    restart: unless-stopped
+    networks:
+      - app-network
+
+  logservice1:
+    build:
+      context: .
+      dockerfile: Dockerfile1
+    ports:
+      - "35001:8080"
+    depends_on:
+      - db
+    networks:
+      app-network:
+        aliases:
+          - lg1
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://admin:erick123@mongodb:27017/logdb
+      - SPRING_DATA_MONGODB_USERNAME=admin
+      - SPRING_DATA_MONGODB_PASSWORD=erick123
+
+  logservice2:
+    build:
+      context: .
+      dockerfile: Dockerfile1
+    ports:
+      - "35002:8080"
+    depends_on:
+      - db
+    networks:
+      app-network:
+        aliases:
+          - lg2
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://admin:erick123@mongodb:27017/logdb
+      - SPRING_DATA_MONGODB_USERNAME=admin
+      - SPRING_DATA_MONGODB_PASSWORD=erick123
+
+  logservice3:
+    build:
+      context: .
+      dockerfile: Dockerfile1
+    ports:
+      - "35003:8080"
+    depends_on:
+      - db
+    networks:
+      app-network:
+        aliases:
+          - lg3
+    environment:
+      - SPRING_DATA_MONGODB_URI=mongodb://admin:erick123@mongodb:27017/logdb
+      - SPRING_DATA_MONGODB_USERNAME=admin
+      - SPRING_DATA_MONGODB_PASSWORD=erick123
+
+  app-lb-roundrobin:
+    build:
+      context: .
+      dockerfile: Dockerfile2
+    ports:
+      - "8080:8080"
+    depends_on:
+      - logservice1
+      - logservice2
+      - logservice3
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
