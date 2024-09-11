@@ -13,7 +13,7 @@ public class MongoConfig {
 
     @Bean
     public MongoClient mongoClient() {
-        return MongoClients.create("mongodb://admin:erick123@mongodb:27017"); // Asegúrate de que la URI de MongoDB es correcta
+        return MongoClients.create("mongodb://admin:nico123@mongodb:27017"); // Asegúrate de que la URI de MongoDB es correcta
     }
 
     @Bean

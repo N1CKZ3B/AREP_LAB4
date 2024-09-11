@@ -12,11 +12,13 @@ services:
       - ./mongo-data:/data/db
     environment:
       MONGO_INITDB_ROOT_USERNAME: admin
-      MONGO_INITDB_ROOT_PASSWORD: erick123
+      MONGO_INITDB_ROOT_PASSWORD: nico123
       MONGO_INITDB_DATABASE: logdb
     restart: unless-stopped
     networks:
-      - app-network
+      app-network:
+        aliases:
+          - mongodb
 
   logservice1:
     build:
@@ -31,9 +33,9 @@ services:
         aliases:
           - lg1
     environment:
-      - SPRING_DATA_MONGODB_URI=mongodb://admin:erick123@mongodb:27017/logdb
+      - SPRING_DATA_MONGODB_URI=mongodb://admin:nico123@mongodb:27017/logdb
       - SPRING_DATA_MONGODB_USERNAME=admin
-      - SPRING_DATA_MONGODB_PASSWORD=erick123
+      - SPRING_DATA_MONGODB_PASSWORD=nico123
 
   logservice2:
     build:
@@ -48,9 +50,9 @@ services:
         aliases:
           - lg2
     environment:
-      - SPRING_DATA_MONGODB_URI=mongodb://admin:erick123@mongodb:27017/logdb
+      - SPRING_DATA_MONGODB_URI=mongodb://admin:nico123@mongodb:27017/logdb
       - SPRING_DATA_MONGODB_USERNAME=admin
-      - SPRING_DATA_MONGODB_PASSWORD=erick123
+      - SPRING_DATA_MONGODB_PASSWORD=nico123
 
   logservice3:
     build:
@@ -65,9 +67,9 @@ services:
         aliases:
           - lg3
     environment:
-      - SPRING_DATA_MONGODB_URI=mongodb://admin:erick123@mongodb:27017/logdb
+      - SPRING_DATA_MONGODB_URI=mongodb://admin:nico123@mongodb:27017/logdb
       - SPRING_DATA_MONGODB_USERNAME=admin
-      - SPRING_DATA_MONGODB_PASSWORD=erick123
+      - SPRING_DATA_MONGODB_PASSWORD=nico123
 
   app-lb-roundrobin:
     build:

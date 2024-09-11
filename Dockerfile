@@ -6,7 +6,7 @@ COPY init-mongo.js /docker-entrypoint-initdb.d/
 
 # Configuración adicional, si es necesario
 ENV MONGO_INITDB_ROOT_USERNAME=admin
-ENV MONGO_INITDB_ROOT_PASSWORD=erick123
+ENV MONGO_INITDB_ROOT_PASSWORD=nico123
 ENV MONGO_INITDB_DATABASE=logdb
 
 
