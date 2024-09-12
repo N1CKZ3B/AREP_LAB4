@@ -17,6 +17,24 @@ The general architecture can be represented as follows:
 ![image](https://github.com/user-attachments/assets/6453fe34-4ea9-4f7a-a62c-c776c3ee2771)
 
 
+```
+C:.
+└───src
+   ├───main
+   │     ├───java
+   │     │     └───edu
+   │     │           └───eci
+   │     │                  └───arep
+   |     └───resources            └───app
+   │     
+   └───test
+         └───java
+                └───edu
+                       └───eci
+                            └───arep
+                                  └───app
+```
+
 ## Class Design
 
 The project is organized into the following main packages and classes:
